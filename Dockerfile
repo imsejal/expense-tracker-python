@@ -1,5 +1,9 @@
+# Dockerfile
 FROM python:3.10-slim
 WORKDIR /app
-COPY . .
+COPY . /app
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+ENV SENDER_EMAIL=""
+ENV SENDER_PASSWORD=""
 CMD ["python", "main.py"]
