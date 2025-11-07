@@ -2,7 +2,7 @@
 """
 Database connection and schema initialization.
 
-Uses sqlite3 and ensures schema is created when a connection is obtained.
+Using sqlite3 and ensuring schema is created when a connection is obtained.
 """
 
 import sqlite3

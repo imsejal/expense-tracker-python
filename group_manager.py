@@ -84,6 +84,6 @@ def split_expense(group_name: str, category: str, amount: float, date: str = Non
             try:
                 add_expense(category, share, user=member, date=dt)
             except Exception:
-                # if personal expense add fails, continue but note it in logs (print)
+                # if personal expense add fails, continue but note it in logs.
                 print(f"Warning: failed to add personal expense record for member '{member}'.")
     return {"per_person": share, "members": members}

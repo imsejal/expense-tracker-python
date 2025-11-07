@@ -23,7 +23,7 @@ def add_expense(category: str, amount: float, user: str = "self", date: str = No
         raise ValueError("Amount must be > 0.")
     # basic date format validation; if not provided, use today's date
     date = date or datetime.now().strftime("%Y-%m-%d")
-    # optionally validate date format more strictly here
+    # validate date format more strictly here
 
     conn = get_db_connection()
     with conn:

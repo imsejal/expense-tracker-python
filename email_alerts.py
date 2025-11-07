@@ -6,7 +6,7 @@ Credentials must be provided via environment variables:
 - SENDER_EMAIL
 - SENDER_PASSWORD
 
-This module handles failures gracefully (prints message and returns False).
+This module handles failures Prints message and returns False.
 """
 
 import os
@@ -15,7 +15,7 @@ from email.mime.text import MIMEText
 
 
 SENDER_EMAIL = os.getenv("SENDER_EMAIL")
-SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")  # recommended: app password for Gmail
+SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")  #app password not gmail password
 
 
 def send_email_alert(receiver_email: str, subject: str, message: str) -> bool:
@@ -37,6 +37,6 @@ def send_email_alert(receiver_email: str, subject: str, message: str) -> bool:
         print(f"Email sent to {receiver_email}")
         return True
     except Exception as e:
-        # do not crash the program because of email failure
+        # Handles email failure
         print(f"Email sending failed: {e}")
         return False
