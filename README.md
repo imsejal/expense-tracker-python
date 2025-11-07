@@ -1,4 +1,4 @@
-# Expense Tracker (L7 Informatics Internship)
+# Expense Tracker
 
 ## Features
 
