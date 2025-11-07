@@ -1,11 +1,22 @@
 # database.py
+"""
+Database connection and schema initialization.
+
+Uses sqlite3 and ensures schema is created when a connection is obtained.
+"""
+
 import sqlite3
 from sqlite3 import Connection
 from typing import Optional
 
 DB_PATH = "expenses.db"
 
+
 def get_db_connection(db_path: Optional[str] = None) -> Connection:
+    """
+    Return a sqlite3.Connection with row_factory set to sqlite3.Row.
+    Ensures schema is created if not already present.
+    """
     path = db_path or DB_PATH
     conn = sqlite3.connect(path, detect_types=sqlite3.PARSE_DECLTYPES)
     conn.row_factory = sqlite3.Row

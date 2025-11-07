@@ -1,12 +1,28 @@
 # email_alerts.py
+"""
+Simple email-sending utility for alerts.
+
+Credentials must be provided via environment variables:
+- SENDER_EMAIL
+- SENDER_PASSWORD
+
+This module handles failures gracefully (prints message and returns False).
+"""
+
 import os
 import smtplib
 from email.mime.text import MIMEText
 
-SENDER_EMAIL = os.getenv("SENDER_EMAIL")
-SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")  # put in env, not in code
 
-def send_email_alert(receiver_email: str, subject: str, message: str):
+SENDER_EMAIL = os.getenv("SENDER_EMAIL")
+SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")  # recommended: app password for Gmail
+
+
+def send_email_alert(receiver_email: str, subject: str, message: str) -> bool:
+    """
+    Try to send an email using Gmail's SMTP server. Returns True on success.
+    If credentials are not configured or sending fails, logs the error and returns False.
+    """
     if not SENDER_EMAIL or not SENDER_PASSWORD:
         print("Email credentials not configured; skipping email send.")
         return False
@@ -18,8 +34,9 @@ def send_email_alert(receiver_email: str, subject: str, message: str):
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
             server.login(SENDER_EMAIL, SENDER_PASSWORD)
             server.send_message(msg)
-        print(f"📧 Email sent to {receiver_email}")
+        print(f"Email sent to {receiver_email}")
         return True
     except Exception as e:
+        # do not crash the program because of email failure
         print(f"Email sending failed: {e}")
         return False
